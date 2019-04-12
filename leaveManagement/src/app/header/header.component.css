@@ -1,0 +1,48 @@
+
+.imgheader{
+  height: 80px;
+  padding: 10px ;
+
+}
+.nav-link{
+  padding: 0px 5px;
+}
+.dropdown-item{
+  margin-left: 10px !important;
+}
+.profilename{
+  padding: 30px;
+}
+.nav{
+  margin-left: 20px;
+}
+.navbar-color-set a{
+  margin: 0;
+  padding: 0;
+  color: #BCC2CB !important;
+}
+.container-fluid{
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  padding: 0;
+}
+ul{
+  list-style-type: none;
+}
+li{
+  margin: 10px 20px;
+}
+@media (max-width : 400px){
+  .imgheader{
+    margin: 20px;
+    padding: 0px;
+    height: 60px;
+  }
+  h6{
+    padding: 0px;
+    margin: 0
+  }
+}

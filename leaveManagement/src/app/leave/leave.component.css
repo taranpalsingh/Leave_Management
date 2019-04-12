@@ -1,0 +1,34 @@
+.background{
+  background-color: #eff3f8;
+}
+h2{
+  color: #5C9BD1 ;
+  padding: 20px 0;
+}
+.body{
+  padding: 30px;
+  margin: 0 auto;
+  background-color: white;
+  height: 1000px;
+}
+table{
+  margin-top: 20px;
+}
+textarea{
+  resize: none;
+}
+
+ /* to align the date inputs */
+.padd > .col-md-2{
+  padding: 0;
+}
+.col-md-5 > input[type="date"]{
+  padding: 0;
+}
+input[type="date"]{
+  font-size: 12px;
+}
+ /**************************/
+leave-links{
+  margin-top: 20px !important; 
+}

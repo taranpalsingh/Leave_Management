@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <ul>
+    <li>
+      <a class="bolder" (click)="PersonalDetailsClicked()">
+        <span *ngIf="!isClickedPersonalDetails">+</span>
+        <span *ngIf="isClickedPersonalDetails">-</span>
+         Personal Details</a>
+
+        <div  id="PersonalDetails" *ngIf="isClickedPersonalDetails" class="row">
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-6 text-center align-self-end">
+                <label for="">First Name : </label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control inputArea" value="{{ PersonalDetails.FirstName}}" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="offset-md-2 col-md-5">
+            <div class="row">
+              <div class="col-md-6 text-center align-self-end">
+                <label for="">Last Name : </label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control inputArea" value="{{ PersonalDetails.LastName }}" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-6 text-center align-self-end">
+                <label for="">D.O.B. : </label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control inputArea" value="{{ PersonalDetails.DOB | slice:0:10}}" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="offset-md-2 col-md-5">
+            <div class="row">
+              <div class="col-md-6 text-center align-self-end">
+                <label for="">Gender : </label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control inputArea" value="{{ PersonalDetails.Gender}}" disabled>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-6 text-center align-self-end">
+                <label for="">Email : </label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control inputArea" value="{{ PersonalDetails.Email}}" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+    </li>
+
+
+
+    <li>
+      <a class="bolder" (click)="LeaveDetailsClicked()">
+        <span *ngIf="!isClickedLeaveDetails">+</span>
+        <span *ngIf="isClickedLeaveDetails">-</span>
+         Leave Details</a>
+      <div *ngIf="isClickedLeaveDetails" id="LeavesTable" class="row">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Total</th>
+              <th scope="col">Balance</th>
+              <th scope="col">Pending</th>
+              <th scope="col">Approved</th>
+              <th scope="col">Rejected</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Log of LeavesLog" >
+              <th>
+                {{Log.Name}}
+              </th>
+              <td>
+                {{Log.Total}}
+              </td>
+              <td>
+                {{Log.Balance}}
+              </td>
+              <td>
+                {{Log.Pending}}
+              </td>
+              <td>
+                {{Log.Approved}}
+              </td>
+              <td>
+                {{Log.Rejected}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+    <li>
+      <a class="bolder" (click)="CurrentProjectsClicked()">
+      <span *ngIf="!isClickedCurrentProjects">+</span>
+      <span *ngIf="isClickedCurrentProjects">-</span>
+      Current Projects</a>
+      <div *ngIf="isClickedCurrentProjects" id="LeavesTable" class="row">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Project</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                {{CurrentProject.Name}}
+              </th>
+              <td>
+                {{CurrentProject.StartDate | slice:0:10}}
+              </td>
+              <td>
+                {{CurrentProject.EndDate | slice:0:10}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+  </ul>
+</div>

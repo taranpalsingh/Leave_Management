@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="header">
+   <div class="row">
+     <div class="col-md-9">
+      <img src="../../assets/logo.png" class = "imgheader" alt="logo" />
+     </div>
+     <div class = "col-md-3 text-center profilename">
+       <h6 id ="headerprofilename"></h6>
+     </div>
+    </div>
+  </div>
+
+  <nav class = "navbar navbar-expand-md bg-dark navbar-dark">
+    <div class = "container-fluid navbar-color-set">
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navBarMenu"
+              aria-controls="navBarMenu"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse " id = "navBarMenu">
+           <ul class="nav">
+               <li class = "nav-item">
+                   <a routerLink="/home" class="nav-link" data-toggle="collapse" data-target="#projects">My Profile</a>
+               </li>
+               <li class = "nav-item">
+                   <a routerLink="/leave" class="nav-link" data-toggle="collapse" data-target="#leavedetail">Personal Time Off</a>
+               </li>
+               <li class="nav-item dropdown bolder">
+                 <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Reviews
+                 </a>
+                 <div class="dropdown-menu bg-dark classhover" aria-labelledby="navbarDropdown">
+                   <a class="dropdown-item" href="" > Self </a>
+                   <div class="dropdown-divider"></div>
+                   <a class="dropdown-item " href="">Other employees</a>
+                 </div>
+               </li>
+            </ul>
+        </div>
+        <div>
+            <ul class = "nav navbar-right">
+                <li class = "nav-item">
+                    <a routerLink="/login" class="nav-link">Log-out </a>
+                </li>
+            </ul>
+        </div>
+     </div>
+  </nav>
+
+
+</div>

@@ -1,0 +1,24 @@
+.bolder{
+  color: #5b9bd1 !important;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+}
+.inputArea{
+  width: 100%;
+}
+ul{
+  list-style-type: none;
+}
+li{
+  margin: 10px 20px;
+}
+#PersonalDetails .col-md-5{
+  margin: 15px 0;
+}
+#LeavesTable{
+  margin: 30px;
+}
+.container-fluid{
+  margin: 30px;
+}
