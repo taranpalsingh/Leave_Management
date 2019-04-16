@@ -9,5 +9,7 @@ import { LeaveSummaryService } from '../leave-summary.service';
 })
 export class HeaderComponent  {
 
-
+  Logout(){
+    sessionStorage.removeItem('id');
+  }
 }

@@ -100,23 +100,31 @@ go
 		SET NOCOUNT OFF
 go
 
+--delete from employee
+
+	drop  procedure InsertAdmin
 
 	create procedure InsertAdmin
 		(
 		@FirstName nvarchar(20),
 		@LastName nvarchar(20),
-		@DOB Date,
 		@Gender nvarchar(20),
+		@DOB Date,
 		@Email nvarchar(20) = NULL,
 		@DateOfJoining date = NULL,
 		@TotalExperience int = NULL
+		--@DOB Date = NULL
 		)
 	as
 		SET NOCOUNT ON;
-		set @DateOfJoining = ISNULL( @DateOfJoining, CONVERT(VARCHAR(10), getdate(), 103));
+		--set @DateOfJoining = ISNULL( @DateOfJoining, CONVERT(VARCHAR(10), getdate(), 103));
+		set @DateOfJoining = ISNULL( @DateOfJoining, getdate());
+		
 		set @Email = ISNULL(@Email, (Lower(@FirstName)+'.'+Lower(@LastName)));
-
-		insert into Employee values( @FirstName, @LastName, @DOB, @Gender, @Email, @DateOfJoining, @TotalExperience)
+		
+		--set @DOB = ISNULL( @DOB, CONVERT(VARCHAR(10), '1996/4/13', 103));
+		
+		insert into Employee values( @FirstName, @LastName, CONVERT(VARCHAR(20),@DOB), @Gender, @Email, @DateOfJoining, @TotalExperience)
 		
 		SET NOCOUNT OFF;
 go
@@ -124,23 +132,25 @@ go
 		(
 		@FirstName nvarchar(20),
 		@LastName nvarchar(20),
-		@DOB Date,
+		--@DOB Date,
 		@Gender nvarchar(20),
 		@CMId int,
 		@Email nvarchar(20) = NULL,
 		@DateOfJoining date = NULL,
-		@TotalExperience int = NULL
+		@TotalExperience int = NULL,
+		@DOB Date = NULL
 		)
 	as
 		SET NOCOUNT ON;
 		
-		set @DateOfJoining = ISNULL( @DateOfJoining, CONVERT(VARCHAR(10), getdate(), 103));
+		set @DateOfJoining = ISNULL( @DateOfJoining, getdate());
 		set @Email = ISNULL(@Email, (Lower(@FirstName)+'.'+Lower(@LastName)));
-
+		set @DOB = ISNULL( @DOB, CONVERT(VARCHAR(10), '1996/4/13', 103));
+		
 		if not exists(select * from Employee where Id = @CMId)
 			THROW 51000, 'CM does not exists.', 1;  
 
-		insert into Employee values( @FirstName, @LastName, @DOB, @Gender, @Email, @DateOfJoining, @TotalExperience)
+		insert into Employee values( @FirstName, @LastName, CAST(@DOB as date), @Gender, @Email, @DateOfJoining, @TotalExperience)
 		
 		
 		Declare @EmployeeId int;
@@ -352,9 +362,6 @@ go
 
 	go
 	
-	getCMOfEmployee 3
-
-	select * from CM
-
+	
 
 

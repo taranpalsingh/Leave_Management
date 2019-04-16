@@ -8,10 +8,31 @@ import { PersonalDetailsComponent } from './personal-details/personal-details.co
 import { MainLinksComponent } from './main-links/main-links.component';
 import { HttpClientModule } from '@angular/common/Http';
 import { LoginComponent } from './login/login.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LeaveComponent } from './leave/leave.component';
 import { LeaveLinksComponent } from './leave-links/leave-links.component';
+import { LeaveSummmaryComponent } from './leave-summmary/leave-summmary.component';
+
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: LoginComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'leave',
+    component: LeaveLinksComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+];
 
 @NgModule({
   declarations: [
@@ -22,28 +43,32 @@ import { LeaveLinksComponent } from './leave-links/leave-links.component';
     LoginComponent,
     HomeComponent,
     LeaveComponent,
-    LeaveLinksComponent
+    LeaveLinksComponent,
+    LeaveSummmaryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-    {
-      path: 'home',
-      component: HomeComponent
-    },
-    {
-      path: 'leave',
-      component: LeaveComponent
-    },
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    ])
-  ],
+    // RouterModule.forRoot([
+    // {
+    //   path: 'home',
+    //   component: HomeComponent
+    // },
+    // {
+    //   path: 'leave',
+    //   component: LeaveLinksComponent
+    // },
+    // {
+    //   path: 'login',
+    //   component: LoginComponent
+    // },
+    // ])
+    RouterModule.forRoot(
+      appRoutes
+      )
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

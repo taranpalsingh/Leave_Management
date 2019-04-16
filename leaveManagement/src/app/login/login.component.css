@@ -3,7 +3,8 @@
 }
 .card{
   width: 40%;
-  max-width: 568px;
+  max-width: 800px;
+  min-width: 400px;
   margin: 0 auto;
 }
 .card-header, .card-footer{
@@ -13,6 +14,6 @@
 .card-body{
   background-color: #eceef1;
 }
-h2{
+h2,h4{
   color: #BCC2CB;
 }

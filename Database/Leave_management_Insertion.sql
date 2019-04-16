@@ -35,6 +35,8 @@ go
 	EXEC InsertProject 2,'DLass'
 	EXEC InsertProject 3,'Dell',@EndDate = '2019-07-07'
 	EXEC InsertProject 4,'Dell',@EndDate = '2019-07-07'
+	EXEC InsertProject 5,'Siepe'
+	EXEC InsertProject 6,'DLass'
 
 go
 	EXEC PrintTables

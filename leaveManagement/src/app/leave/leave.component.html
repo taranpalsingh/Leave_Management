@@ -1,73 +1,66 @@
-<header></header>
+<div class="body">
 
-<div class="background">
-
-  <div class="container">
-    <h2>Personal Time OFF</h2>
-
-    <div class="body">
-      <button class="btn btn-primary" (click)="TimeOffClicked()"
-        data-toggle="modal" data-target="#exampleModal">
-        + Request Time OFF
-      </button>
-      <leave-links></leave-links>
-      <div>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Type</th>
-              <th scope="col">Total Days</th>
-              <th scope="col">Status</th>
-              <th scope="col">From</th>
-              <th scope="col">To</th>
-              <th scope="col">Reviewer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let Log of LeavesLog" >
-              <th>
-                {{Log.Type}}
-              </th>
-              <td>
-                {{Log.Total}}
-              </td>
-              <td>
-                {{Log.Status}}
-              </td>
-              <td>
-                {{Log.LeaveFrom | slice:0:10}}
-              </td>
-              <td>
-                {{Log.LeaveTo | slice:0:10}}
-              </td>
-              <td>
-                {{Log.Reviewer}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <button *ngIf="btnReqd" class="btn btn-primary" (click)="TimeOffClicked()"
+    data-toggle="modal" data-target="#exampleModal">
+    + Request Time OFF
+  </button>
+  <br *ngIf="!btnReqd">
+  <div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Total Days</th>
+          <th scope="col">Status</th>
+          <th scope="col">From</th>
+          <th scope="col">To</th>
+          <th scope="col">Reviewer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let Log of LeavesLog" >
+        <tr  *ngIf="Log.Status==Status || DontCheck">
+          <th>
+            {{Log.Type}}
+          </th>
+          <td>
+            {{Log.Total}}
+          </td>
+          <td>
+            {{Log.Status}}
+          </td>
+          <td>
+            {{Log.LeaveFrom | slice:0:10}}
+          </td>
+          <td>
+            {{Log.LeaveTo | slice:0:10}}
+          </td>
+          <td>
+            {{Log.Reviewer}}
+          </td>
+        </tr>
+      </ng-container>
+      <!-- </ng-container> -->
+      </tbody>
+    </table>
   </div>
 </div>
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> -->
 
 <!-- Modal -->
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Leave Application Request</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title text-center" id="exampleModalLabel">New Leave Application Request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="Reset(f)">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form #f="ngForm" (ngSubmit)="Submit(f)">
+        <form #f="ngForm" (ngSubmit)="RaiseRequest(f)">
 
           <div class="form-group">
             <div class="row">
@@ -76,10 +69,15 @@
               </div>
               <div class="col-md-9">
                 <select required ngModel #type="ngModel" name="type"
-                        class="form-control text-center">
+                        class="form-control text-center"  (change)="Log(type)" >
                   <option *ngFor="let type of Types" [value]="type.Name">
                      {{type.Name}} </option>
                 </select>
+                <div *ngIf="type.touched && !(type.valid)">
+                  <div *ngIf="type.errors.required" class="alert alert-danger">
+                    Type is required.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -92,7 +90,12 @@
                 <div class="row padd">
                   <div class="col-md-5">
                     <input required ngModel #FromDate="ngModel"
-                    name="FromDate"type="date" class="form-control">
+                    name="FromDate"type="date"class="form-control">
+                    <div *ngIf="FromDate.touched && !(FromDate.valid)">
+                      <div *ngIf="FromDate.errors.required" class="alert alert-danger">
+                        Required.
+                      </div>
+                    </div>
                   </div>
                   <div class="col-md-2 text-center">
                     to
@@ -100,6 +103,11 @@
                   <div class="col-md-5">
                     <input required ngModel #ToDate="ngModel"
                     name="ToDate" type="date" class="form-control">
+                    <div *ngIf="ToDate.touched && !(ToDate.valid)">
+                      <div *ngIf="ToDate.errors.required" class="alert alert-danger">
+                        Required.
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -120,9 +128,11 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-info" (click)="RaiseRequest(f)"
-                data-dismiss="modal">Raise Request
+                data-dismiss="modal" [disabled]="!f.valid"
+                >Raise Request
         </button>
-        <button class="btn btn-danger">Close
+        <button class="btn btn-danger" (click)="Reset(f)"
+                data-dismiss="modal">Close
         </button>
       </div>
     </div>

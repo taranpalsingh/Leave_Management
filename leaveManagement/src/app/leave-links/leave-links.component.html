@@ -1,17 +1,35 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">My requests</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Remaining balance</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Open Requests</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Closed balance</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Holiday List</a>
-  </li>
-</ul>
+<header></header>
+<div class="background">
+  <div class="container">
+    <h2>Personal Time OFF</h2>
+    <div class="InnerContainer">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isRequestsClicked"  (click)="RequestsClicked()" >My Requests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isBalanceClicked" (click)="BalancesClicked()">Remaining balance</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isOpenClicked" (click)="OpenClicked()">Open Requests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isApprovedClicked" (click)="ApprovedClicked()">Approved Requests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isRejectedClicked" (click)="RejectedClicked()">Rejected Requests</a>
+        </li>
+      </ul>
+
+
+
+      <leave DontCheck="1" Status="Approved" btnReqd="1" *ngIf="isRequestsClicked"></leave>
+      <leave DontCheck="0" Status="Pending" btnReqd="0" *ngIf="isOpenClicked"></leave>
+      <leave DontCheck="0" Status="Rejected" btnReqd="0" *ngIf="isRejectedClicked"></leave>
+      <leave DontCheck="0" Status="Approved" btnReqd="0" *ngIf="isApprovedClicked"></leave>
+      <leave-summmary id="id" *ngIf="isBalanceClicked"></leave-summmary>
+
+    </div>
+
+  </div>
+</div>

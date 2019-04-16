@@ -1,3 +1,29 @@
 ul{
   margin: 20px;
 }
+.background{
+  background-color: #eff3f8;
+  height: 1000px;
+}
+h2{
+  color: #5C9BD1 ;
+  padding: 20px 0;
+}
+.InnerContainer{
+
+  padding: 30px;
+  margin: 0 auto;
+  background-color: white;
+
+}
+.container{
+  padding: 0;
+  margin: auto;
+}
+#LeavesTable{
+  margin: 30px;
+  background-color: white;
+}
+.nav-item{
+  cursor: pointer;
+}

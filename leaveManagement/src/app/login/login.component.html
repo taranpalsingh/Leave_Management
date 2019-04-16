@@ -9,21 +9,32 @@
       <h2>Login to your account</h2>
     </div>
     <div class="card-body">
+        <div class="col-sm-12">
+            <div *ngIf="id == 0" class="alert alert-danger text-center">
+                Incorrect username or password
+            </div>
+        </div>
         <div class="col-sm-8 offset-sm-2 text-center">
-            <form class="form justify-content-center">
+            <form #f="ngForm" (ngSubmit)="Submit(f)">
                 <div class="form-group">
-                    <label for="email">Username</label>
-                    <input type="email" class="form-control text-center" name="email">
+                    <label for="username">Username</label>
+                    <input required class="form-control text-center"
+                          name="username" ngModel #username="ngModel"
+                          type="username" >
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Password</label>
-                    <input type="password" class="form-control text-center"  name="password">
+                    <label for="password">Password</label>
+                    <input required class="form-control text-center"
+                           name="password" ngModel #password="ngModel"
+                           type="password" >
                 </div>
-        </form>
-    </div>
-    </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+
+        </div>
+      </div>
     <div class="card-footer text-center">
-      <button class="btn btn-primary" routerLink="/home">Submit</button>
+      <h4>Forgot your Password ?</h4>
     </div>
   </div>
 </div>

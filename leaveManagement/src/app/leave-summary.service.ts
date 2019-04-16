@@ -42,5 +42,8 @@ export class LeaveSummaryService {
   getCM(id){
     return this.http.get("http://localhost:3333/employee/CM/"+id);
   }
+  loginRequest(obj){
+    return this.http.post("http://localhost:3333/login", obj);
+  }
 
 }

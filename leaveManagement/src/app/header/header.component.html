@@ -24,13 +24,21 @@
        <div class="collapse navbar-collapse " id = "navBarMenu">
            <ul class="nav">
                <li class = "nav-item">
-                   <a routerLink="/home" class="nav-link" data-toggle="collapse" data-target="#projects">My Profile</a>
+                 <a routerLink="/home"
+                    class="nav-link" >
+                   My Profile
+                 </a>
                </li>
                <li class = "nav-item">
-                   <a routerLink="/leave" class="nav-link" data-toggle="collapse" data-target="#leavedetail">Personal Time Off</a>
+                 <a routerLink="/leave"
+                  class="nav-link">
+                  Personal Time Off
+                 </a>
                </li>
                <li class="nav-item dropdown bolder">
-                 <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <a class="nav-link dropdown-toggle " href="#"
+                 id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
                    Reviews
                  </a>
                  <div class="dropdown-menu bg-dark classhover" aria-labelledby="navbarDropdown">
@@ -44,7 +52,7 @@
         <div>
             <ul class = "nav navbar-right">
                 <li class = "nav-item">
-                    <a routerLink="/login" class="nav-link">Log-out </a>
+                    <a routerLink="/login" class="nav-link" (click)=Logout()>Log-out </a>
                 </li>
             </ul>
         </div>

@@ -11,50 +11,36 @@ export class MainLinksComponent implements OnInit {
 
   PersonalDetails;
   CurrentProject;
-  LeavesLog;
   isClickedPersonalDetails = false ;
   isClickedLeaveDetails = false ;
   isClickedCurrentProjects = false ;
-  isClickedPastProjects = false ;
   id: Number;
+  DetailsRecived: Number = 0;
 
   constructor(private service: LeaveSummaryService){ }
 
   ngOnInit() {
-    this.id = 3;
+
+    this.id = Number(sessionStorage.getItem('id'));
     // console.log(this.id);
+    this.service.getPersonalDetails(this.id)
+    .subscribe(Response => {
+      this.PersonalDetails = Response[0];
+      console.log(Response[0]);
+      this.DetailsRecived = 1;
+    },
+    (error) => {
+      alert('Error');
+    })
   }
 
   PersonalDetailsClicked(){
-    if(this.isClickedPersonalDetails)
-      this.isClickedPersonalDetails = !this.isClickedPersonalDetails;
-    else{
-      this.service.getPersonalDetails(this.id)
-      .subscribe(Response => {
-        this.PersonalDetails = Response[0];
-        // console.log(Response[0]);
-        this.isClickedPersonalDetails = !this.isClickedPersonalDetails;
-      },
-      (error) => {
-        alert('Error');
-      })
-    }
+    this.isClickedPersonalDetails = !this.isClickedPersonalDetails;
   }
 
   LeaveDetailsClicked(){
-    if(this.isClickedLeaveDetails)
+    // if(this.isClickedLeaveDetails)
       this.isClickedLeaveDetails = !this.isClickedLeaveDetails;
-    else {
-      this.service.getLeavesLog(this.id)
-      .subscribe(Response => {
-        this.LeavesLog = Response;
-        // console.log(Response);
-        this.isClickedLeaveDetails = !this.isClickedLeaveDetails;
-      },
-      (error) => {
-        alert('Error');
-      })
-    }
   }
 
   CurrentProjectsClicked(){

@@ -98,6 +98,20 @@ app.post('/employee/leave/Request', async function (req, res) {
   executeQuery (res, query);
 })
 
+app.post('/login', async function(req, res){
+
+  console.log("login api");
+  console.log(req.body);
+  var query = 'EXEC verifyLogin \'' + req.body.username + '\', \'' + req.body.password +'\' ;';
+  executeQuery (res, query);
+
+})
+
+app.get('/login2', async function (req, res) {
+
+  console.log(req.body);
+})
+
 var server = app.listen(PORT, function () {
     var host = server.address().address;
     var port = server.address().port;

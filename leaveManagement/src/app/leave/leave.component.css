@@ -1,18 +1,13 @@
-.background{
-  background-color: #eff3f8;
-}
-h2{
-  color: #5C9BD1 ;
-  padding: 20px 0;
-}
 .body{
   padding: 30px;
+  padding-top: 0;
   margin: 0 auto;
   background-color: white;
-  height: 1000px;
+  /* height: 1000px; */
 }
 table{
-  margin-top: 20px;
+  margin: 20px auto;
+  width: 80%;
 }
 textarea{
   resize: none;
@@ -29,6 +24,3 @@ input[type="date"]{
   font-size: 12px;
 }
  /**************************/
-leave-links{
-  margin-top: 20px !important; 
-}
