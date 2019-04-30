@@ -1,0 +1,25 @@
+<header></header>
+<div class="background">
+  <div class="container">
+    <h2>Review Leave Requests</h2>
+    <div class="InnerContainer">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isOpenClicked" (click)="OpenClicked()">Open Requests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isApprovedClicked" (click)="ApprovedClicked()">Approved Requests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="isRejectedClicked" (click)="RejectedClicked()">Rejected Requests</a>
+        </li>
+      </ul>
+
+      <review-leaves-table *ngIf="isOpenClicked" Status="Pending"></review-leaves-table>
+      <review-leaves-table *ngIf="isApprovedClicked" Status="Approved"></review-leaves-table>
+      <review-leaves-table *ngIf="isRejectedClicked" Status="Rejected"></review-leaves-table>
+
+    </div>
+
+  </div>
+</div>

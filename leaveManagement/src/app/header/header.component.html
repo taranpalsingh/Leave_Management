@@ -35,17 +35,11 @@
                   Personal Time Off
                  </a>
                </li>
-               <li class="nav-item dropdown bolder">
-                 <a class="nav-link dropdown-toggle " href="#"
-                 id="navbarDropdown" role="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                   Reviews
+               <li class = "nav-item" *ngIf="isCM">
+                 <a routerLink="/Reviewleave"
+                  class="nav-link">
+                  Review Leaves
                  </a>
-                 <div class="dropdown-menu bg-dark classhover" aria-labelledby="navbarDropdown">
-                   <a class="dropdown-item" href="" > Self </a>
-                   <div class="dropdown-divider"></div>
-                   <a class="dropdown-item " href="">Other employees</a>
-                 </div>
                </li>
             </ul>
         </div>

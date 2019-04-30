@@ -8,9 +8,6 @@
   /* border-bottom: 1px solid #eee; */
   color: #5b9bd1 !important;
 }
-.inputArea{
-  width: 100%;
-}
 .container-fluid{
   height: 1000px;
   margin-top: 30px;
@@ -29,11 +26,7 @@ ul{
 li{
   margin: 10px 20px;
 }
-#PersonalDetails .col-md-5{
-  margin: 15px 0;
-}
 table{
-  /* width: 80%; */
   margin: auto;
 }
 #ProjectsTable{

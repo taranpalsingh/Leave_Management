@@ -5,7 +5,7 @@
     + Request Time OFF
   </button>
   <br *ngIf="!btnReqd">
-  <div>
+  <div class="table-responsive">
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -40,9 +40,13 @@
           </td>
         </tr>
       </ng-container>
-      <!-- </ng-container> -->
       </tbody>
     </table>
+  </div>
+  <div *ngIf="timeClash" class="alert alert-danger">
+    <strong>
+      {{sqlError}}
+    </strong>
   </div>
 </div>
 
@@ -69,7 +73,7 @@
               </div>
               <div class="col-md-9">
                 <select required ngModel #type="ngModel" name="type"
-                        class="form-control text-center"  (change)="Log(type)" >
+                        class="form-control text-center">
                   <option *ngFor="let type of Types" [value]="type.Name">
                      {{type.Name}} </option>
                 </select>
@@ -89,8 +93,9 @@
               <div class="col-md-9">
                 <div class="row padd">
                   <div class="col-md-5">
-                    <input required ngModel #FromDate="ngModel"
-                    name="FromDate"type="date"class="form-control">
+                    <input required ngModel #FromDate="ngModel" id="date1"
+                    name="FromDate"type="date"class="form-control" (change)="date1Update(f)"
+                    min="{{minDate1}}" max="{{maxDate1}}">
                     <div *ngIf="FromDate.touched && !(FromDate.valid)">
                       <div *ngIf="FromDate.errors.required" class="alert alert-danger">
                         Required.
@@ -101,8 +106,9 @@
                     to
                   </div>
                   <div class="col-md-5">
-                    <input required ngModel #ToDate="ngModel"
-                    name="ToDate" type="date" class="form-control">
+                    <input required ngModel #ToDate="ngModel" id="date2"
+                    name="ToDate" type="date" class="form-control"
+                    min="{{minDate2}}">
                     <div *ngIf="ToDate.touched && !(ToDate.valid)">
                       <div *ngIf="ToDate.errors.required" class="alert alert-danger">
                         Required.

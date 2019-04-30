@@ -1,3 +1,53 @@
-<p>
-  personal-details works!
-</p>
+<div class="row">
+
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-6 text-center align-self-end">
+        <label for="">First Name : </label>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control inputArea" value="{{ PersonalDetails.FirstName}}" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="offset-md-2 col-md-5">
+    <div class="row">
+      <div class="col-md-6 text-center align-self-end">
+        <label for="">Last Name : </label>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control inputArea" value="{{ PersonalDetails.LastName }}" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-6 text-center align-self-end">
+        <label for="">D.O.B. : </label>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control inputArea" value="{{ PersonalDetails.DOB | slice:0:10}}" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="offset-md-2 col-md-5">
+    <div class="row">
+      <div class="col-md-6 text-center align-self-end">
+        <label for="">Gender : </label>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control inputArea" value="{{ PersonalDetails.Gender}}" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-6 text-center align-self-end">
+        <label for="">Email : </label>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control inputArea" value="{{ PersonalDetails.Email}}" disabled>
+      </div>
+    </div>
+  </div>
+</div>

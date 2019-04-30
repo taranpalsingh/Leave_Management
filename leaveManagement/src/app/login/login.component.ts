@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   id = 1;
+  isCM;
   constructor(
     private service: LeaveSummaryService,
     private router: Router
@@ -30,9 +31,12 @@ export class LoginComponent implements OnInit {
     .subscribe(data  => {
       console.log(data);
       this.id = data[0].id;
+      this.isCM = data[0].isCM;
       if(this.id != 0){
           this.router.navigateByUrl('/home');
+          // var token = jwt.sign({id:this.id}, 'leave');
           sessionStorage.setItem('id',String(this.id));
+          sessionStorage.setItem('isCM',String(this.isCM));
           f.reset();
       }
     },

@@ -1,0 +1,106 @@
+<div class="body">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Employee</th>
+        <th scope="col">Days</th>
+        <!-- <th scope="col" *ngIf="DontCheck">Status</th> -->
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Reason</th>
+        <th scope="col" *ngIf="Status=='Pending'">Review</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let Log of ReviewLeavesLog" >
+      <tr *ngIf="Log.Status==Status">
+        <th>
+          {{Log.Type}}
+        </th>
+        <td>
+          {{Log.Name}}
+        </td>
+        <td>
+          {{Log.Total}}
+        </td>
+        <!-- <td *ngIf="DontCheck">
+          {{Log.Status}}
+        </td> -->
+        <td>
+          {{Log.LeaveFrom | slice:0:10}}
+        </td>
+        <td>
+          {{Log.LeaveTo | slice:0:10}}
+        </td>
+        <td>
+          {{Log.Reason}}
+        </td>
+        <td *ngIf="Status=='Pending'" class="text-center">
+          <img src="/../../assets/edit.png" alt="EDIT"
+               width="30px" height="30px" class="clickable" (click)="RequestId = Log.RequestId"
+               data-toggle="modal" data-target="#exampleModal">
+        </td>
+      </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="ReviewLeave(f)">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <label for="type"> Status </label>
+              </div>
+              <div class="col-md-9">
+                <select required ngModel #newStatus="ngModel" name="newStatus"
+                        class="form-control text-center">
+                  <option *ngFor="let newStatus of StatusTypes" [value]="newStatus">
+                     {{newStatus}} </option>
+                </select>
+                <div *ngIf="newStatus.touched && !(newStatus.valid)">
+                  <div *ngIf="newStatus.errors.required" class="alert alert-danger">
+                    Status is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 text-center">
+              <label for="type">Reason </label>
+            </div>
+            <div class="col-md-9">
+              <textarea required ngModel #Reason="ngModel"
+                 name="Reason" class="form-control"
+                 cols="30" rows="5"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-info" (click)="ReviewLeave(f)"
+                data-dismiss="modal" [disabled]="!f.valid"
+                >Update
+        </button>
+        <button class="btn btn-danger" (click)="Reset(f)"
+                data-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,11 @@
+
 console.log("Starting Index JS");
 const PORT = 3333;
 
 const sql = require('mssql');
 const express = require('express');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 var app = express();
 app.use(bodyParser.json());
@@ -19,13 +21,11 @@ var sqlConfig = {
   server: 'CYG225',
   database: 'Leave_Management'
 }
-
-var  executeQuery = function(res, query){
-  debugger;
+var executeQuery = function(res, query){
   new sql.ConnectionPool(sqlConfig).connect().then(pool => {
       return pool.request().query(query)
   }).then(result => {
-      let rows = result.recordset
+      let rows = result.recordset;
       res.setHeader('Access-Control-Allow-Origin', '*')
       res.status(200).json(rows);
       sql.close();
@@ -35,20 +35,18 @@ var  executeQuery = function(res, query){
   });
 }
 
-
-
-
 app.get('/employee/:id', async function (req, res) {
   console.log(req.params.id);
   let id = req.params.id;
   var query = 'EXEC EmployeeById ' + Number(id);
-  executeQuery (res, query);
+  executeQuery(res, query);
 })
+
+
 
 app.get('/leave/types', async function (req, res) {
   var query = 'EXEC TypesOfLeaves' ;
   executeQuery (res, query);
-
 })
 
 app.get('/employee/project/:id', async function (req, res) {
@@ -80,6 +78,21 @@ app.get('/employee/leaveLog/:id', async function (req, res) {
   executeQuery (res, query);
 })
 
+app.get('/employee/ReviewleaveLog/:id', async function (req, res) {
+  console.log(req.params.id);
+  let id = req.params.id;
+  var query = 'EXEC ReviewerSeeLeaveRequest ' + id ;
+  executeQuery (res, query);
+})
+
+app.post('/employee/Reviewleave', async function (req, res) {
+
+  console.log(req.body);
+
+  var query = 'EXEC ReviewLeaveRequest ' + req.body.RequestId +','+ req.body.ReviewerId +', \''+ req.body.Reason +'\',\''+ req.body.Status +'\' ;' ;
+  executeQuery (res, query);
+})
+
 app.get('/employee/CM/:id', async function (req, res) {
 
   console.log(req.params.id);
@@ -98,18 +111,34 @@ app.post('/employee/leave/Request', async function (req, res) {
   executeQuery (res, query);
 })
 
+
 app.post('/login', async function(req, res){
 
   console.log("login api");
-  console.log(req.body);
-  var query = 'EXEC verifyLogin \'' + req.body.username + '\', \'' + req.body.password +'\' ;';
-  executeQuery (res, query);
+
+  sql.connect(sqlConfig, function() {
+    var request = new sql.Request();
+    request.query('EXEC verifyLogin \'' + req.body.username + '\', \'' + req.body.password +'\' ;' , function(err, recordset) {
+      if(err){
+        console.log(err);
+        sql.close();
+      }
+      let result = recordset.recordset;
+      console.log(result);
+      // if(result[0].id != 0){
+      //   var token = jwt.sign({id:result[0].id}, 'leave');
+      //   localStorage.setItem('token', token);
+      // }
+      res.send(recordset.recordset);
+      sql.close();
+    });
+  });
 
 })
 
-app.get('/login2', async function (req, res) {
-
-  console.log(req.body);
+app.post('/test', async function(req,res){
+  // console.log("gotchaa");
+  res.send(req.body.name);
 })
 
 var server = app.listen(PORT, function () {

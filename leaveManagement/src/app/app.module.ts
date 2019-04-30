@@ -13,11 +13,17 @@ import { HomeComponent } from './home/home.component';
 import { LeaveComponent } from './leave/leave.component';
 import { LeaveLinksComponent } from './leave-links/leave-links.component';
 import { LeaveSummmaryComponent } from './leave-summmary/leave-summmary.component';
+import { ReviewLeavesComponent } from './review-leaves/review-leaves.component';
+import { ReviewLeavesTableComponent } from './review-leaves-table/review-leaves-table.component';
 
 
 const appRoutes: Routes = [
   {
     path: '',
+    component: LoginComponent
+  },
+  {
+    path: 'login',
     component: LoginComponent
   },
   {
@@ -29,8 +35,8 @@ const appRoutes: Routes = [
     component: LeaveLinksComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'Reviewleave',
+    component: ReviewLeavesComponent
   },
 ];
 
@@ -44,7 +50,9 @@ const appRoutes: Routes = [
     HomeComponent,
     LeaveComponent,
     LeaveLinksComponent,
-    LeaveSummmaryComponent
+    LeaveSummmaryComponent,
+    ReviewLeavesComponent,
+    ReviewLeavesTableComponent
   ],
   imports: [
     BrowserModule,

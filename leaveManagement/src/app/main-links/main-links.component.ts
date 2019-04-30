@@ -17,7 +17,8 @@ export class MainLinksComponent implements OnInit {
   id: Number;
   DetailsRecived: Number = 0;
 
-  constructor(private service: LeaveSummaryService){ }
+  constructor(private service: LeaveSummaryService){
+  }
 
   ngOnInit() {
 

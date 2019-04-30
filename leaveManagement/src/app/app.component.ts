@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'leaveManagement';
 
   ngOnInit(){
-    sessionStorage.setItem('id','2');
+    // sessionStorage.setItem('id','2');
   }
 }
