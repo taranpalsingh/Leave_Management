@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LeaveSummaryService } from '../leave-summary.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -13,10 +15,14 @@ export class HeaderComponent implements OnInit  {
   employeeCM;
   isCM = 0;
 
-  constructor(private service : LeaveSummaryService){}
+  constructor(private service : LeaveSummaryService,
+              // private router: Router,
+              private authService: AuthService){}
   ngOnInit(){
-    this.isCM = Number(sessionStorage.getItem('isCM'));
-    this.id = Number(sessionStorage.getItem('id'));
+    let token = localStorage.getItem('token');
+    this.isCM = Number(localStorage.getItem('isCM'));
+    this.id = Number(localStorage.getItem('id'));
+
     this.service.getCM(this.id)
     .subscribe(Response => {
       this.employeeCM = Response[0].Name;
@@ -25,8 +31,11 @@ export class HeaderComponent implements OnInit  {
       alert('Error');
     })
   }
+
   Logout(){
-    sessionStorage.removeItem('id');
-    sessionStorage.removeItem('isCM');
+    localStorage.removeItem('id');
+    localStorage.removeItem('isCM');
+    localStorage.removeItem('token');
+    // this.router.navigateByUrl('login')\
   }
 }

@@ -18,7 +18,7 @@ export class LeaveLinksComponent implements OnInit {
   constructor(private service: LeaveSummaryService) { }
 
   ngOnInit() {
-    this.id = Number(sessionStorage.getItem('id'));
+    this.id = Number(localStorage.getItem('id'));
   }
   RequestsClicked(){
     this.isRequestsClicked = true;

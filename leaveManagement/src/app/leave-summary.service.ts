@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/Http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,16 @@ import { HttpClient } from '@angular/common/Http';
 export class LeaveSummaryService {
 
   constructor(private http: HttpClient) {}
+  // headerDict = {
+  //   'Content-Type': 'application/json',
+  //   'Accept': 'application/json',
+  //   'Access-Control-Allow-Headers': 'Content-Type',
+  //   'token': 'my-auth-token',
+  // }
+  //
+  // requestOptions = {
+  //   headers: new Headers(this.headerDict),
+  // };
 
   getPersonalDetails(id){
     return this.http.get("http://localhost:3333/employee/"+id);
@@ -38,4 +49,5 @@ export class LeaveSummaryService {
   ReviewLeave(obj){
     return this.http.post("http://localhost:3333/employee/Reviewleave", obj);
   }
+
 }

@@ -13,7 +13,7 @@ export class PersonalDetailsComponent implements OnInit {
   constructor(private service: LeaveSummaryService) { }
 
   ngOnInit() {
-    this.id = Number(sessionStorage.getItem('id'));
+    this.id = Number(localStorage.getItem('id'));
     // console.log(this.id);
     this.service.getPersonalDetails(this.id)
     .subscribe(Response => {

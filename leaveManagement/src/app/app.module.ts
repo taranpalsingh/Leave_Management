@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { MainLinksComponent } from './main-links/main-links.component';
-import { HttpClientModule } from '@angular/common/Http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/Http';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -15,6 +15,8 @@ import { LeaveLinksComponent } from './leave-links/leave-links.component';
 import { LeaveSummmaryComponent } from './leave-summmary/leave-summmary.component';
 import { ReviewLeavesComponent } from './review-leaves/review-leaves.component';
 import { ReviewLeavesTableComponent } from './review-leaves-table/review-leaves-table.component';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorsService } from './token-interceptors.service';
 
 
 const appRoutes: Routes = [
@@ -32,11 +34,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'leave',
-    component: LeaveLinksComponent
+    component: LeaveLinksComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'Reviewleave',
-    component: ReviewLeavesComponent
+    component: ReviewLeavesComponent,
+    canActivate: [AuthGuard]
   },
 ];
 
@@ -59,20 +63,6 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    // RouterModule.forRoot([
-    // {
-    //   path: 'home',
-    //   component: HomeComponent
-    // },
-    // {
-    //   path: 'leave',
-    //   component: LeaveLinksComponent
-    // },
-    // {
-    //   path: 'login',
-    //   component: LoginComponent
-    // },
-    // ])
     RouterModule.forRoot(
       appRoutes
       )

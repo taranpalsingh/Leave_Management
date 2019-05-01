@@ -18,7 +18,7 @@ go
 	EXEC InsertLeaves N'Work From Home', 3;
 go
 	EXEC InsertLeaveRequest 6, 'Casual', N'2019/10/23', N'2019/10/25', N'Family Function'
-	EXEC InsertLeaveRequest 4, 'Casual', '2019/10/23', '2019/10/24', N'Family Reeasons'
+	EXEC InsertLeaveRequest 4, 'Casual', '2019/10/23', '2019/10/24', N'Family Reasons'
 	EXEC InsertLeaveRequest 4, 'Casual', '2019/10/23', '2019/10/24', N'Fun'
 	--EXEC InsertLeaveRequest 4, 1, '2019/10/26', '2019/10/24', N'Fun' -- Error Check command
 go

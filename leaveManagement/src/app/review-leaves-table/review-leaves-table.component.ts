@@ -18,9 +18,9 @@ export class ReviewLeavesTableComponent implements OnInit {
               private router: Router){ }
 
   ngOnInit() {
-    console.log(this.Status);
-    this.id = Number(sessionStorage.getItem('id'));
-    if(Number(sessionStorage.getItem('isCM'))==0){
+    //console.log(this.Status);
+    this.id = Number(localStorage.getItem('id'));
+    if(Number(localStorage.getItem('isCM'))==0){
       alert('You are not authorized to Review Leave Requests');
       this.router.navigateByUrl('/home');
     }
@@ -28,7 +28,7 @@ export class ReviewLeavesTableComponent implements OnInit {
     this.service.getReviewLeavesLog(this.id)
     .subscribe(Response => {
       this.ReviewLeavesLog = Response;
-      console.log(this.ReviewLeavesLog);
+      //console.log(this.ReviewLeavesLog);
     },
     (error) => {
       alert('Error');
@@ -39,18 +39,18 @@ export class ReviewLeavesTableComponent implements OnInit {
     f.reset();
   }
   ReviewLeave(f){
-    console.log(this.RequestId);
-    console.log(f);
+    //console.log(this.RequestId);
+    //console.log(f);
     let obj = {
       RequestId: this.RequestId,
       ReviewerId: this.id,
       Reason: f.value.Reason,
       Status: f.value.newStatus
     }
-    console.log(obj);
+    //console.log(obj);
     this.service.ReviewLeave(obj)
       .subscribe(data => {
-        console.log("Updated Successfully");
+        //console.log("Updated Successfully");
         let index = this.ReviewLeavesLog.map(function(e){return Number(e.RequestId)}).indexOf(this.RequestId);
         this.ReviewLeavesLog.splice(index,1);
       },

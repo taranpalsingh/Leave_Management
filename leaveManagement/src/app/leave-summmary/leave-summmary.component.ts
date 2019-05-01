@@ -14,7 +14,7 @@ export class LeaveSummmaryComponent implements OnInit {
 
   ngOnInit() {
 
-    this.id = Number(sessionStorage.getItem('id'));
+    this.id = Number(localStorage.getItem('id'));
     this.service.getLeavesLog(this.id)
     .subscribe(Response => {
       this.LeavesLog = Response;

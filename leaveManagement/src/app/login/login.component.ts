@@ -30,13 +30,14 @@ export class LoginComponent implements OnInit {
     this.service.loginRequest(Obj)
     .subscribe(data  => {
       console.log(data);
-      this.id = data[0].id;
-      this.isCM = data[0].isCM;
+      this.id = data["id"];
+      this.isCM = data["isCM"];
       if(this.id != 0){
           this.router.navigateByUrl('/home');
           // var token = jwt.sign({id:this.id}, 'leave');
-          sessionStorage.setItem('id',String(this.id));
-          sessionStorage.setItem('isCM',String(this.isCM));
+          localStorage.setItem('id',String(this.id));
+          localStorage.setItem('isCM',String(this.isCM));
+          localStorage.setItem('token', data["token"])
           f.reset();
       }
     },

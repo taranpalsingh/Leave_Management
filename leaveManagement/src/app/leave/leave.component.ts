@@ -34,7 +34,7 @@ export class LeaveComponent implements OnInit {
     this.maxDate1 = (tdate.getFullYear()+1)+'-'+((tdate.getMonth().toString().length == 1)?"0":"")+(tdate.getMonth()+1)+'-'+((tdate.getDate().toString().length == 1)?"0":"")+tdate.getDate();
     // console.log(this.minDate1);
     this.btnReqd = Number(this.btnReqd);
-    this.id = Number(sessionStorage.getItem('id'));
+    this.id = Number(localStorage.getItem('id'));
     this.DontCheck = Number(this.DontCheck);
 
     this.service.getCM(this.id)

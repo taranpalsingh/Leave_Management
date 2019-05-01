@@ -35,6 +35,7 @@ var executeQuery = function(res, query){
   });
 }
 
+
 app.get('/employee/:id', async function (req, res) {
   console.log(req.params.id);
   let id = req.params.id;
@@ -115,7 +116,6 @@ app.post('/employee/leave/Request', async function (req, res) {
 app.post('/login', async function(req, res){
 
   console.log("login api");
-
   sql.connect(sqlConfig, function() {
     var request = new sql.Request();
     request.query('EXEC verifyLogin \'' + req.body.username + '\', \'' + req.body.password +'\' ;' , function(err, recordset) {
@@ -125,20 +125,46 @@ app.post('/login', async function(req, res){
       }
       let result = recordset.recordset;
       console.log(result);
-      // if(result[0].id != 0){
-      //   var token = jwt.sign({id:result[0].id}, 'leave');
-      //   localStorage.setItem('token', token);
-      // }
-      res.send(recordset.recordset);
+      if(result[0].id != 0){
+        let t = {};
+        if(result[0].isCM == "1"){
+          t = {
+              id:result[0].id,
+              role: "CM"
+          }
+        }
+        else{
+          let t = {
+              id:result[0].id,
+              role: "employee"
+          }
+        }
+        var token = jwt.sign(t, 'leave_123');
+        let myObj = {
+          token: token,
+          id: result[0].id,
+          isCM: result[0].isCM
+        }
+        res.send(myObj);
+      }
+      else
+        res.send(0);
       sql.close();
     });
   });
-
 })
 
-app.post('/test', async function(req,res){
-  // console.log("gotchaa");
-  res.send(req.body.name);
+app.post('/employee/token',async function(req,res){
+
+  console.log("auth api");
+  let auth = tokenCheck(req.body.token);
+  console.log(auth);
+  if(auth === "Authorized"){
+    console.log("Authorized ok");
+    res.send({status:"OK"});
+  }
+  else
+    res.send({status: "No"});
 })
 
 var server = app.listen(PORT, function () {
@@ -146,3 +172,12 @@ var server = app.listen(PORT, function () {
     var port = server.address().port;
     console.log("app listening at http://%s:%s", host, port);
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function tokenCheck(token){
+  let payload = jwt.verify(token, 'leave_123');
+  console.log("inside tokencheck");
+  if((payload.role === "employee") || (payload.role === "CM"))
+    return "Authorized";
+}

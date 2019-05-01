@@ -22,12 +22,10 @@ export class MainLinksComponent implements OnInit {
 
   ngOnInit() {
 
-    this.id = Number(sessionStorage.getItem('id'));
-    // console.log(this.id);
+    this.id = Number(localStorage.getItem('id'));
     this.service.getPersonalDetails(this.id)
     .subscribe(Response => {
       this.PersonalDetails = Response[0];
-      console.log(Response[0]);
       this.DetailsRecived = 1;
     },
     (error) => {
@@ -40,7 +38,6 @@ export class MainLinksComponent implements OnInit {
   }
 
   LeaveDetailsClicked(){
-    // if(this.isClickedLeaveDetails)
       this.isClickedLeaveDetails = !this.isClickedLeaveDetails;
   }
 
@@ -51,8 +48,6 @@ export class MainLinksComponent implements OnInit {
       this.service.getCurrentProject(this.id)
       .subscribe(Response => {
         this.CurrentProject = Response[0];
-        console.log("response received");
-        // console.log(Response[0]);
         this.isClickedCurrentProjects = !this.isClickedCurrentProjects;
       },
       (error) => {
