@@ -67,7 +67,11 @@ const appRoutes: Routes = [
       appRoutes
       )
     ],
-  providers: [],
+  providers: [{
+    provide : HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorsService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

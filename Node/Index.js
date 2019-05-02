@@ -11,7 +11,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
 
@@ -37,81 +37,116 @@ var executeQuery = function(res, query){
 
 
 app.get('/employee/:id', async function (req, res) {
-  console.log(req.params.id);
-  let id = req.params.id;
-  var query = 'EXEC EmployeeById ' + Number(id);
-  executeQuery(res, query);
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    let id = req.params.id;
+    var query = 'EXEC EmployeeById ' + Number(id);
+    executeQuery(res, query);
+  }
+
+  else {
+    res.send("Not authorized");
+  }
 })
 
-
-
 app.get('/leave/types', async function (req, res) {
-  var query = 'EXEC TypesOfLeaves' ;
-  executeQuery (res, query);
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    var query = 'EXEC TypesOfLeaves' ;
+    executeQuery (res, query);
+  }
+
+  else {
+    res.send("Not authorized");
+  }
 })
 
 app.get('/employee/project/:id', async function (req, res) {
-
-  console.log(req.params.id);
-  let id = req.params.id;
-  var query = 'EXEC ProjectByEmployeeId ' + id;
-  executeQuery (res, query);
-
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    let id = req.params.id;
+    var query = 'EXEC ProjectByEmployeeId ' + id;
+    executeQuery (res, query);
+  }
+  else {
+    res.send("Not authorized");
+  }
 })
 
-
 app.get('/employee/leave/:id', async function (req, res) {
-
-  console.log(req.params.id);
   let id = req.params.id;
   var query = 'EXEC EmployeeSeeLeaveSummary ' + id ;
   executeQuery (res, query);
-
 })
 
 app.get('/employee/leaveLog/:id', async function (req, res) {
-
-
-  console.log(req.params.id);
-  let id = req.params.id;
-
-  var query = 'EXEC EmployeeSeeLeaveRequestsLog ' + id ;
-  executeQuery (res, query);
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    let id = req.params.id;
+    var query = 'EXEC EmployeeSeeLeaveRequestsLog ' + id ;
+    executeQuery (res, query);
+  }
+  else {
+    res.send("Not authorized");
+  }
 })
 
 app.get('/employee/ReviewleaveLog/:id', async function (req, res) {
-  console.log(req.params.id);
-  let id = req.params.id;
-  var query = 'EXEC ReviewerSeeLeaveRequest ' + id ;
-  executeQuery (res, query);
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    let id = req.params.id;
+    var query = 'EXEC ReviewerSeeLeaveRequest ' + id ;
+    executeQuery (res, query);
+  }
+  else {
+    res.send("Not authorized");
+  }
 })
 
 app.post('/employee/Reviewleave', async function (req, res) {
 
-  console.log(req.body);
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    var query = 'EXEC ReviewLeaveRequest ' + req.body.RequestId +','+ req.body.ReviewerId +', \''+ req.body.Reason +'\',\''+ req.body.Status +'\' ;' ;
+    executeQuery (res, query);
+  }
+  else {
+    res.send("Not authorized");
+  }
 
-  var query = 'EXEC ReviewLeaveRequest ' + req.body.RequestId +','+ req.body.ReviewerId +', \''+ req.body.Reason +'\',\''+ req.body.Status +'\' ;' ;
-  executeQuery (res, query);
 })
 
 app.get('/employee/CM/:id', async function (req, res) {
 
-  console.log(req.params.id);
-  let id = req.params.id;
-  var query = 'EXEC getCMOfEmployee ' + id;
-  executeQuery (res, query);
-
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    let id = req.params.id;
+    var query = 'EXEC getCMOfEmployee ' + id;
+    executeQuery (res, query);
+  }
+  else {
+    res.send("Not authorized");
+  }
 })
 
 app.post('/employee/leave/Request', async function (req, res) {
-
-  console.log(req.body);
-  console.log('EXEC InsertLeaveRequest ' + req.body.Id +', \''+ req.body.Type +'\', \''+ req.body.LeaveFrom +'\',\''+ req.body.LeaveTo +'\',\''+ req.body.Reason +'\' ;');
-
-  var query = 'EXEC InsertLeaveRequest ' + req.body.Id +', \''+ req.body.Type +'\', \''+ req.body.LeaveFrom +'\',\''+ req.body.LeaveTo +'\',\''+ req.body.Reason +'\' ;' ;
-  executeQuery (res, query);
+  let token = req.headers.authorization;
+  let auth = await tokenCheck(token);
+  if(auth === "Authorized"){
+    var query = 'EXEC InsertLeaveRequest ' + req.body.Id +', \''+ req.body.Type +'\', \''+ req.body.LeaveFrom +'\',\''+ req.body.LeaveTo +'\',\''+ req.body.Reason +'\' ;' ;
+    executeQuery (res, query);
+  }
+  else {
+    res.send("Not authorized");
+  }
 })
-
 
 app.post('/login', async function(req, res){
 
@@ -120,12 +155,10 @@ app.post('/login', async function(req, res){
     var request = new sql.Request();
     request.query('EXEC verifyLogin \'' + req.body.username + '\', \'' + req.body.password +'\' ;' , function(err, recordset) {
       if(err){
-        console.log(err);
         sql.close();
       }
       let result = recordset.recordset;
-      console.log(result);
-      if(result[0].id != 0){
+      if(result[0].id != 0){   // id = 0, when the user does not exists, from database
         let t = {};
         if(result[0].isCM == "1"){
           t = {
@@ -133,8 +166,8 @@ app.post('/login', async function(req, res){
               role: "CM"
           }
         }
-        else{
-          let t = {
+        else if(result[0].isCM == "0"){
+          t = {
               id:result[0].id,
               role: "employee"
           }
@@ -154,19 +187,6 @@ app.post('/login', async function(req, res){
   });
 })
 
-app.post('/employee/token',async function(req,res){
-
-  console.log("auth api");
-  let auth = tokenCheck(req.body.token);
-  console.log(auth);
-  if(auth === "Authorized"){
-    console.log("Authorized ok");
-    res.send({status:"OK"});
-  }
-  else
-    res.send({status: "No"});
-})
-
 var server = app.listen(PORT, function () {
     var host = server.address().address;
     var port = server.address().port;
@@ -178,6 +198,9 @@ var server = app.listen(PORT, function () {
 function tokenCheck(token){
   let payload = jwt.verify(token, 'leave_123');
   console.log("inside tokencheck");
-  if((payload.role === "employee") || (payload.role === "CM"))
+  if((payload.role === "employee") || (payload.role === "CM")){
     return "Authorized";
+  }
+  else
+    return 0;
 }

@@ -8,16 +8,6 @@ import { HttpHeaders } from '@angular/common/http';
 export class LeaveSummaryService {
 
   constructor(private http: HttpClient) {}
-  // headerDict = {
-  //   'Content-Type': 'application/json',
-  //   'Accept': 'application/json',
-  //   'Access-Control-Allow-Headers': 'Content-Type',
-  //   'token': 'my-auth-token',
-  // }
-  //
-  // requestOptions = {
-  //   headers: new Headers(this.headerDict),
-  // };
 
   getPersonalDetails(id){
     return this.http.get("http://localhost:3333/employee/"+id);

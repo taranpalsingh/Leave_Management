@@ -15,7 +15,7 @@ export class MainLinksComponent implements OnInit {
   isClickedLeaveDetails = false ;
   isClickedCurrentProjects = false ;
   id: Number;
-  DetailsRecived: Number = 0;
+  DetailsReceived: Number = 0;
 
   constructor(private service: LeaveSummaryService){
   }
@@ -26,7 +26,7 @@ export class MainLinksComponent implements OnInit {
     this.service.getPersonalDetails(this.id)
     .subscribe(Response => {
       this.PersonalDetails = Response[0];
-      this.DetailsRecived = 1;
+      this.DetailsReceived = 1;
     },
     (error) => {
       alert('Error');
