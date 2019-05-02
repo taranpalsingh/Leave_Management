@@ -31,7 +31,7 @@ export class ReviewLeavesTableComponent implements OnInit {
       //console.log(this.ReviewLeavesLog);
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
 
   }
@@ -55,7 +55,7 @@ export class ReviewLeavesTableComponent implements OnInit {
         this.ReviewLeavesLog.splice(index,1);
       },
       (error) => {
-        alert("Error");
+        alert(error);
       })
   }
 

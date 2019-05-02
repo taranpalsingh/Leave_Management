@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       }
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
 
   }

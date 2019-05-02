@@ -29,7 +29,7 @@ export class MainLinksComponent implements OnInit {
       this.DetailsReceived = 1;
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
   }
 
@@ -51,7 +51,7 @@ export class MainLinksComponent implements OnInit {
         this.isClickedCurrentProjects = !this.isClickedCurrentProjects;
       },
       (error) => {
-        alert('Error');
+        alert(error);
       })
     }
   }

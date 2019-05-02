@@ -20,7 +20,7 @@ export class LeaveSummmaryComponent implements OnInit {
       this.LeavesLog = Response;
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
   }
 

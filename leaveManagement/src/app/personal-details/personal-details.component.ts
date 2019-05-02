@@ -11,6 +11,7 @@ export class PersonalDetailsComponent implements OnInit {
   id: Number;
   PersonalDetails: object;
   DetailsRecived: Number = 0;
+  // error = null;
   constructor(private service: LeaveSummaryService) { }
 
   ngOnInit() {
@@ -22,7 +23,8 @@ export class PersonalDetailsComponent implements OnInit {
       this.DetailsRecived = 1;
     },
     (error) => {
-      alert('Error');
+      console.log(error);
+      alert(error);
     })
   }
 

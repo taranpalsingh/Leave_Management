@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit  {
       this.employeeCM = Response[0].Name;
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
   }
 

@@ -42,7 +42,7 @@ export class LeaveComponent implements OnInit {
       this.employeeCM = Response[0].Name;
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
 
     this.service.getLeaveRequestsLog(this.id)
@@ -61,7 +61,7 @@ export class LeaveComponent implements OnInit {
       }
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
 
 
@@ -73,7 +73,7 @@ export class LeaveComponent implements OnInit {
       this.Types = Response;
     },
     (error) => {
-      alert('Error');
+      alert(error);
     })
   }
   RaiseRequest(f){
@@ -107,12 +107,6 @@ export class LeaveComponent implements OnInit {
         f.reset();
     },
     (error) => {
-      // this.timeClash = 1;
-      // console.log(this.timeClash);
-      // setTimeout(function(){
-      //   this.timeClash = 0;
-      //   console.log(this.timeClash);
-      // },2000);
       this.sqlError = error.error.message.originalError.info.message;
       console.log(error);
       alert(error.error.message.originalError.info.message);
